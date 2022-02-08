@@ -29,9 +29,32 @@ public class Solution1 {
 //        int result = tribonacci(n);
 
         String title = "i First leTTeR of EACH Word";
+        int[] nums = {2,2,4,3,4,3,3};
+        deleteAndEarn(nums);
 
         System.out.println(capitalizeTitle(title));
     }
+
+    public static int deleteAndEarn(int[] nums) {
+
+        //排序并归并成可计算的
+
+        int maxVal = 0;
+        for (int val : nums) {
+            maxVal = Math.max(maxVal, val);
+        }
+        int[] sum = new int[maxVal + 1];
+        for (int val : nums) {
+            sum[val] += val;
+        }
+
+        return rob(sum);
+
+
+    }
+
+
+
 
     /**
      * 给你一个整数数组 cost ，其中 cost[i] 是从楼梯第 i 个台阶向上爬需要支付的费用。一旦你支付此费用，即可选择向上爬一个或者两个台阶。
@@ -102,24 +125,17 @@ public class Solution1 {
             list.add(dummy.next.val); //因为前面定义的时候是一个虚拟头结点
             dummy = dummy.next;
         }
-
         int max = 0;
         for (int i = 0;i<=(list.size() - 1)/2 ;i++){
             max = Math.max(max,list.get(i) + list.get(list.size() -1 -i));
         }
-
         return max;
-
     }
-
-
 
 
     public static String capitalizeTitle(String title){
         String xiao = title.toLowerCase();
         String[] sb = xiao.split(" ");
-
-
         StringBuilder sb1 = new StringBuilder();
 
         for (int i = 0;i<sb.length;i++){
@@ -132,10 +148,7 @@ public class Solution1 {
            }
             sb1.append(" ");
         }
-
         sb1.delete(sb1.length()-1,sb1.length());
-
-
         return sb1.toString();
     }
 
@@ -151,7 +164,6 @@ public class Solution1 {
     }
 
     public static int tribonacci(int n) {
-
         int[] t = new int[38];
 
         t[0] = 0;
@@ -161,8 +173,72 @@ public class Solution1 {
         for (int i = 3; i <= n; i++) {
             t[i] = t[i-3] + t[i-2] + t[i-1];
         }
-
         return t[n];
+    }
+
+    /**
+     * 打家劫社（一）
+     * @param nums
+     * @return
+     */
+    public static int rob(int[] nums) {
+
+        if (nums == null || nums.length == 0){
+            return 0;
+        }
+
+        int length = nums.length;
+        if (length == 1){
+            return nums[0];
+        }
+
+        int[] dp = new int[nums.length];
+        dp[0] = nums[0];
+        dp[1] = Math.max(nums[0],nums[1]);
+
+        for (int i = 2;i<length;i++){
+            dp[i] = Math.max(dp[i-2]+nums[i],dp[i-1]);
+        }
+
+        return dp[length-1];
+    }
+
+    /**
+     * 打家劫社（二）
+     */
+
+    public int rob2(int[] nums) {
+
+        if (nums == null || nums.length == 0){
+            return 0;
+        }
+
+        int length = nums.length;
+        if (length == 1){
+            return nums[0];
+        }
+
+        if (length == 2){
+            return Math.max(nums[0],nums[1]);
+        }
+
+        return Math.max(subRob(nums,0,length - 2 ),subRob(nums,0,length - 1));
+
 
     }
+
+    //学习怎么把中间的抽出来。
+    private int subRob(int[] nums, int start,int end){
+        int first = nums[start];
+        int second = Math.max(nums[start],nums[start + 1]);
+
+        for (int i = start + 2; i <= end; i++) {
+            int temp = second;
+            second = Math.max(first + nums[i], second);
+            first = temp;
+        }
+
+        return second;
+    }
+
 }
