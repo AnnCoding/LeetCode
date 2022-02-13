@@ -53,9 +53,6 @@ public class Solution1 {
 
     }
 
-
-
-
     /**
      * 给你一个整数数组 cost ，其中 cost[i] 是从楼梯第 i 个台阶向上爬需要支付的费用。一旦你支付此费用，即可选择向上爬一个或者两个台阶。
      *
@@ -75,11 +72,39 @@ public class Solution1 {
         //--你可以选择从下标为 0 或下标为 1 的台阶开始爬楼梯。
         dp[0] = dp[1] = 0;
 
+        //可以理解为离开这个台阶需要花费的金额
         for (int i = 2;i<=n;i++){
             dp[i] = Math.min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
         }
 
         return dp[n];
+    }
+
+    public int minCostClimbingStairsV2(int[] cost) {
+        int n = cost.length;  //所要爬上去的高度
+
+        int prev = 0;
+        int curr = 0;
+
+        int next = 0;
+        //可以理解为离开这个台阶需要花费的金额
+        for (int i = 2;i<=n;i++){
+            next = Math.min(curr + cost[i - 1], prev + cost[i - 2]);
+            curr = next;
+            prev = curr;
+        }
+        return next;
+
+        /*
+        int n = cost.length;
+        int prev = 0, curr = 0;
+        for (int i = 2; i <= n; i++) {
+            int next = Math.min(curr + cost[i - 1], prev + cost[i - 2]);
+            prev = curr;
+            curr = next;
+        }
+        return curr;
+         */
     }
 
 
