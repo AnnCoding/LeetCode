@@ -265,4 +265,22 @@ public class Solution1 {
         return second;
     }
 
+    private int deleteAndEarnV2(int[] nums){
+
+        int length = nums.length;
+        int maxVal = 0;
+        for (int i = 0;i<length;i++){
+            maxVal = Math.max(maxVal,nums[i]);
+        }
+
+        int[] dp = new int[maxVal+1];
+        for (int i=0;i<length;i++){
+            int val = nums[i];
+            dp[val] += val;
+        }
+        return subRob(dp,0,maxVal);
+    }
+
+
+
 }
