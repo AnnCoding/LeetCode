@@ -1,7 +1,5 @@
 package dynamic;
 
-import december.Solution;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -247,7 +245,8 @@ public class Solution1 {
             return Math.max(nums[0],nums[1]);
         }
 
-        return Math.max(subRob(nums,0,length - 2 ),subRob(nums,0,length - 1));
+        //注意这里有个首尾相连的地方
+        return Math.max(subRob(nums,0,length - 2 ),subRob(nums,1,length - 1));
 
 
     }
