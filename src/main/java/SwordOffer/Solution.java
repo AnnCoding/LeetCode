@@ -12,6 +12,32 @@ public class Solution {
 
     }
 
+    //左旋转字符串
+    public String reverseLeftWords(String s, int n) {
+        return s.substring(n,s.length()) + s.substring(0,n);
+    }
+
+    //替换空格
+    private String replaceSpace(String s){
+        int length = s.length();
+        char[] array = new char[length * 3];
+        int size = 0;
+
+        for (int i = 0;i<length;i++){
+            char c = s.charAt(i);
+            if (c == ' '){
+                array[size++] = '%';
+                array[size++] = '2';
+                array[size++] = '0';
+            }else {
+                array[size++] = c;
+            }
+        }
+
+        String newStr = new String(array,0,size);
+        return newStr;
+    }
+
     //从尾到头打印链表 - 用栈
     private static int[] reversePrint(ListNode head){
         Stack<ListNode> stack = new Stack<>();
