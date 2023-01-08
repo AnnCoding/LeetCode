@@ -20,6 +20,162 @@ public class Solution {
 
     }
 
+    //对称的二叉树 - 两种方法：递归 or 迭代
+    public boolean isSymmetric(TreeNode root){
+        return check(root,root);
+    }
+
+    public boolean check(TreeNode p,TreeNode q){
+        if (p == null && q == null){
+            return true;
+        }
+
+        if (p == null || q == null){
+            return false;
+        }
+
+        return p.val == q.val && check(p.left,q.right) && check(p.right,q.left);
+    }
+
+
+    //二叉树的镜像 - 递归
+    public TreeNode mirrorTree(TreeNode root){
+        if (root == null){
+            return null;
+        }
+
+        TreeNode left = mirrorTree(root.left);
+        TreeNode right = mirrorTree(root.right);
+
+        root.left = right;
+        root.right = left;
+
+        return root;
+    }
+
+
+    //树的子结构 - 递归
+    public boolean isSubStructure(TreeNode A,TreeNode B){
+        if (A == null || B == null){
+            return false;
+        }
+        //先从根节点判断B是不是A的子结构，如果不是在分别从左右两个子树判断，只要有一个为true 就说明B是A的子结构
+        return isSub(A, B) || isSubStructure(A.left,B) || isSubStructure(A.right,B);
+    }
+
+    public boolean isSub(TreeNode A,TreeNode B){
+        //这里如果B为空 说明B已经访问完了，确定是A的子结构
+        if (B == null){
+            return true;
+        }
+
+        //如果B不为空A为空，或者，这两个节点值不同，说明B不是A的字结构，直接返回false
+        if (A == null || A.val != B.val){
+            return false;
+        }
+
+        //当前节点比较完之后还要继续判断左右子节点
+        return isSub(A.left,B.left) && isSub(A.right,B.right);
+    }
+
+    //3-从上到下按照之字型打印 - 广度优先遍历 - 按照不同层级左到右或从右到左
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root){
+        List<List<Integer>> ans = new LinkedList<List<Integer>>();
+        if (root == null){
+            return ans;
+        }
+        Queue<TreeNode> nodeQueue = new LinkedList<TreeNode>();
+        nodeQueue.offer(root);
+
+        boolean isOrderLeft = true;
+
+        while (!nodeQueue.isEmpty()){
+            Deque<Integer> levelList = new LinkedList<Integer>();//双端队列
+            int size = nodeQueue.size();
+            for (int i = 1;i <= size;i++){
+                TreeNode curNode = nodeQueue.poll();
+                if (isOrderLeft){
+                    levelList.offerLast(curNode.val);
+                }else {
+                    levelList.offerFirst(curNode.val);
+                }
+
+                if (curNode.left != null){
+                    nodeQueue.offer(curNode.left);
+                }
+                if (curNode.right != null){
+                    nodeQueue.offer(curNode.right);
+                }
+            }
+
+            ans.add(new LinkedList<Integer>(levelList));
+            isOrderLeft = !isOrderLeft;
+        }
+        return ans;
+    }
+
+    //2-从上到下打印二叉树 - 广度优先搜索 -  按照层级打印
+    public List<List<Integer>> levelOrder2(TreeNode root){
+        List<List<Integer>> ret = new ArrayList<>();
+        if (root == null){
+            return ret;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()){
+            List<Integer> level = new ArrayList<>();
+            int currentLevelSize = queue.size();
+            for (int i = 1; i <= currentLevelSize;++i){
+                TreeNode node = queue.poll();
+                level.add(node.val);
+
+                if (node.left != null){
+                    queue.offer(node.left);
+                }
+
+                if(node.right != null){
+                    queue.offer(node.right);
+                }
+            }
+            ret.add(level);
+        }
+        return ret;
+    }
+
+
+    //1-从上到下打印二叉树 - 广度优先搜索BFS - 队列
+    public int[] levelOrder(TreeNode root){
+        if (root == null){
+            return new int[0];
+        }
+        Queue<TreeNode> queue = new LinkedList<TreeNode>(){{
+            add(root);
+        }};
+
+        ArrayList<Integer> ans = new ArrayList<>();
+        while (!queue.isEmpty()){
+            TreeNode node = queue.poll();
+            ans.add(node.val);//写入数组
+
+            if (node.left != null){
+                queue.add(node.left);
+            }
+
+            if (node.right != null){
+                queue.add(node.right);
+            }
+        }
+
+        int[] res = new int[ans.size()];
+        for (int i = 0;i < ans.size();i++){
+            res[i] = ans.get(i);
+        }
+
+        return res;
+    }
+
     //第一次只出现一次的字符
     public char firstUniqChar(String s){
         Map<Character,Integer> position = new HashMap<>();
