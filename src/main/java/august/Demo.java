@@ -1,6 +1,5 @@
 package august;
 
-import com.sun.tools.javac.util.StringUtils;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,8 +1,5 @@
 package december;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
