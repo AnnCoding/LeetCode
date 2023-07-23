@@ -12,7 +12,7 @@ import java.util.Set;
 public class Demo {
 
     public static void main(String[] args) {
-        String astr = "helo";
+        String astr = "hello";
         System.out.println(isUnique(astr));
     }
 
