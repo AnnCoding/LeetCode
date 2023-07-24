@@ -1,4 +1,4 @@
-package may;
+package projectTest;
 
 /**
  * @author chenjiena
@@ -15,10 +15,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-
 public class CcifEcifPrinter {
-
-
 
     public  static List<List<String>> classify(Map<String, List<String>> ccifMap) {
         // ecif 对应 ccif集合 的映射
@@ -116,7 +113,4 @@ public class CcifEcifPrinter {
             System.out.println();
         }
     }
-
-
-
 }
