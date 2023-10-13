@@ -10,7 +10,7 @@ import java.util.Set;
  * @version 1.0
  * @created 2021/8/21.
  */
-public class simple {
+public class Simple {
 
     public static void main(String[] args) {
 
@@ -39,7 +39,7 @@ public class simple {
     PriorityQueue<Integer> queMin;
     PriorityQueue<Integer> queMax;
 
-    public simple() {
+    public Simple() {
         queMin = new PriorityQueue<Integer>((a, b) -> (b - a));
         queMax = new PriorityQueue<Integer>((a, b) -> (a - b));
     }
