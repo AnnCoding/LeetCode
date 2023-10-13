@@ -27,7 +27,7 @@
 * O(n3)立方型，
 * O(nk)k次方型，
 * O(2n)指数型。
-![comparing Big O Function](/Users/chenjiena/IdeaProjects/LeetCode/src/resources/comparingBigOFunction.jpg)
+![comparing Big O Function](LeetCode/src/resources/comparingBigOFunction.jpg)
 
 ---
 > 常见的算法时间复杂度由小到大依次为：Ο(1)＜Ο(log n)＜Ο(n)＜Ο(nlog n)＜Ο(n2)＜Ο(n3)＜…＜Ο(2^n)＜Ο(n!)。
@@ -92,7 +92,7 @@ for (int i = 0; i < m; i++) {
 >同理，立方阶O(n³)、K次方阶O(n^k)，只不过是嵌套了3层循环、k层循环而已。
 
 ### 排序算法对比
-![function_table](/Users/chenjiena/IdeaProjects/LeetCode/src/resources/functionTable.jpg)
+![function_table](LeetCode/src/resources/functionTable.jpg)
 
 ### 空间复杂度
 >程序执行除了需要存储空间、指令、常数、变量和输入数据外，还包括对数据进行操作的工作单元和存储计算所需信息的辅助空间。
