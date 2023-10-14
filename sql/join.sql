@@ -122,6 +122,44 @@
  group by a.student_id , su.subject_name
  order by a.student_id , su.subject_name
 
+ -- 确认率
+ -- 表: Signups
+ -- +----------------+----------+
+ -- | Column Name    | Type     |
+ -- +----------------+----------+
+ -- | user_id        | int      |
+ -- | time_stamp     | datetime |
+ -- +----------------+----------+
+ -- User_id是该表的主键。
+ -- 每一行都包含ID为user_id的用户的注册时间信息。
+ --
+ --
+ -- 表: Confirmations
+ -- +----------------+----------+
+ -- | Column Name    | Type     |
+ -- +----------------+----------+
+ -- | user_id        | int      |
+ -- | time_stamp     | datetime |
+ -- | action         | ENUM     |
+ -- +----------------+----------+
+ -- (user_id, time_stamp)是该表的主键。
+ -- user_id是一个引用到注册表的外键。
+ -- action是类型为('confirmed'， 'timeout')的ENUM
+ -- 该表的每一行都表示ID为user_id的用户在time_stamp请求了一条确认消息，该确认消息要么被确认('confirmed')，要么被过期('timeout')。
+ --
+ --
+ -- 用户的 确认率 是 'confirmed' 消息的数量除以请求的确认消息的总数。没有请求任何确认消息的用户的确认率为 0 。确认率四舍五入到 小数点后两位 。
+ --
+ -- 编写一个SQL查询来查找每个用户的 确认率 。
+ --
+ -- 以 任意顺序 返回结果表。
+
+ -- 使用聚合函数 avg;使用数值函数 round； 使用流程控制函数 if
+ select s.user_id,round(avg(if(c.action = 'confirmed',1,0)),2) as confirmation_rate from Signups s left join Confirmations c
+ on s.user_id = c.user_id
+ group by s.user_id
+
+
 
 
 
