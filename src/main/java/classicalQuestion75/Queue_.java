@@ -76,8 +76,6 @@ public class Queue_ {
         }
         return radiant != 0? "Radiant" :"Dire";
     }
-
-
 }
 
 
