@@ -4,7 +4,6 @@ import java.util.*;
 
 public class Tree_ {
 
-
     public static void main(String[] args) {
         TreeNode head = new TreeNode(10);
         TreeNode head1 = new TreeNode(5);
@@ -30,7 +29,6 @@ public class Tree_ {
         rightSideView(head);
         maxLevelSum(head);
     }
-
 
     /**
      * 二叉树的最大深度

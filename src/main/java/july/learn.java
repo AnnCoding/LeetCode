@@ -31,7 +31,7 @@ public class learn {
 //        ArrayList<String> c = (ArrayList<String>) a.subList(0,1); //报错了
 //        String[] d = (String[]) a.toArray(); //报错
 
-        b.remove(0);//报错
+//        b.remove(0);//报错
 
 
     }
